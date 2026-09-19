@@ -121,7 +121,7 @@ export class AppComponent {
   }
 
   continueManual(): void {
-    alert('The existing manual service journey remains available as the fallback path. This POC demonstrates the AI-assisted route.');
+    window.location.href = 'https://mtimeuat.mtcit.gov.om/services/temporary-registration';
   }
 
   onFilesSelected(event: Event, group: EvidenceGroup): void {
