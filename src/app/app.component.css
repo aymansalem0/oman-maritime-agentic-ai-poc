@@ -1218,3 +1218,428 @@
     width: auto;
   }
 }
+
+
+/* =========================================================
+   Responsive layout enhancements
+   Desktop-first: 1440 → laptop → tablet → mobile
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .page-container,
+  .header-inner {
+    width: min(1180px, calc(100% - 36px));
+  }
+
+  .service-grid {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 28px;
+  }
+
+  .workspace-layout,
+  .employee-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+
+  .service-hero h1 {
+    font-size: 27px;
+  }
+
+  .journey-item {
+    flex-basis: 120px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 992px) {
+  .page-container {
+    width: min(94%, 900px);
+    padding-top: 20px;
+  }
+
+  .header-inner {
+    width: 94%;
+  }
+
+  .service-grid,
+  .workspace-layout,
+  .employee-layout,
+  .three-cards,
+  .upload-grid,
+  .officer-data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-side-card {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 22px 0 0;
+  }
+
+  .service-side-card .primary,
+  .service-side-card .secondary {
+    max-width: 360px;
+  }
+
+  .journey-strip {
+    gap: 0;
+    margin: 16px 0;
+    scrollbar-width: thin;
+  }
+
+  .journey-item {
+    flex: 0 0 150px;
+  }
+
+  .screen-card {
+    padding: 26px 22px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summary-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ai-drawer.inline,
+  .ai-review-panel {
+    position: static;
+  }
+
+  .employee-layout .ai-review-panel {
+    order: -1;
+  }
+
+  .evidence-layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .evidence-details {
+    grid-column: 1 / -1;
+  }
+
+  .paper-preview {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header {
+    height: 64px;
+  }
+
+  .header-inner {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .menu-link span,
+  .header-actions .divider,
+  .header-actions span:last-child {
+    display: none;
+  }
+
+  .header-actions {
+    font-size: 12px;
+  }
+
+  .page-container {
+    width: 100%;
+    padding: 14px 14px 48px;
+  }
+
+  .breadcrumbs {
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    font-size: 12px;
+  }
+
+  .service-hero {
+    padding: 26px 20px;
+  }
+
+  .service-hero h1 {
+    font-size: 23px;
+  }
+
+  .service-hero p {
+    font-size: 14px;
+  }
+
+  .ministry-line {
+    font-size: 13px;
+  }
+
+  .application-toolbar {
+    height: 50px;
+    padding: 0 12px;
+  }
+
+  .application-toolbar .text-action {
+    font-size: 12px;
+  }
+
+  .small-brand {
+    width: 44px;
+    height: 44px;
+  }
+
+  .service-title-band {
+    padding: 15px 16px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .journey-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .journey-item {
+    flex: 0 0 135px;
+    min-width: 135px;
+  }
+
+  .screen-heading,
+  .screen-heading.compact,
+  .section-title-row,
+  .exception-title,
+  .modal-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .screen-heading.compact > .secondary {
+    align-self: flex-start;
+  }
+
+  .screen-heading h2,
+  .decision-hero h2 {
+    font-size: 23px;
+  }
+
+  .three-cards,
+  .upload-grid,
+  .field-grid,
+  .source-comparison,
+  .decision-summary,
+  .decision-grid,
+  .summary-stats,
+  .score-row,
+  .officer-data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-zone {
+    min-height: 170px;
+  }
+
+  .file-table-card {
+    overflow-x: auto;
+  }
+
+  .file-row {
+    min-width: 760px;
+  }
+
+  .button-row,
+  .inline-input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button-row .primary,
+  .button-row .secondary,
+  .inline-input-row .primary,
+  .inline-input-row .secondary {
+    width: 100%;
+  }
+
+  .inline-input-row input {
+    min-width: 0;
+    width: 100%;
+    min-height: 42px;
+  }
+
+  .review-sections > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .review-sections button {
+    justify-self: start;
+  }
+
+  .request-meta {
+    gap: 8px;
+  }
+
+  .evidence-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .document-list,
+  .document-preview,
+  .evidence-details {
+    grid-column: auto;
+  }
+
+  .paper-preview {
+    width: 100%;
+    min-height: 400px;
+    padding: 24px;
+  }
+
+  .ai-drawer.floating {
+    left: 14px;
+    right: 14px;
+    bottom: 80px;
+    width: auto;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .floating-ai {
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-container {
+    padding: 10px 10px 42px;
+  }
+
+  .service-hero {
+    padding: 22px 16px;
+  }
+
+  .service-hero h1 {
+    font-size: 20px;
+  }
+
+  .service-grid {
+    gap: 18px;
+    padding-top: 20px;
+  }
+
+  .content-section h2 {
+    font-size: 19px;
+  }
+
+  .screen-card {
+    padding: 18px 14px;
+    border-radius: 6px;
+  }
+
+  .screen-heading {
+    gap: 12px;
+  }
+
+  .ai-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    font-size: 20px;
+  }
+
+  .screen-heading h2,
+  .decision-hero h2 {
+    font-size: 21px;
+  }
+
+  .service-title-band {
+    font-size: 14px;
+  }
+
+  .journey-item {
+    flex-basis: 124px;
+    min-width: 124px;
+    padding: 8px;
+  }
+
+  .journey-dot {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  .summary-stats > div,
+  .score-row > div {
+    padding: 12px;
+  }
+
+  .profile-section,
+  .exception-card {
+    padding: 15px;
+  }
+
+  .field-value-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-chip {
+    margin-top: 4px;
+  }
+
+  .source-comparison > div {
+    padding: 14px;
+  }
+
+  .declaration-box {
+    align-items: flex-start;
+  }
+
+  .readiness-pill,
+  .human-badge,
+  .panel-badge {
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  .ai-review-panel {
+    padding: 16px;
+  }
+
+  .evidence-modal {
+    width: calc(100vw - 16px);
+    max-height: 94vh;
+    padding: 14px;
+  }
+
+  .paper-preview {
+    min-height: 340px;
+    padding: 18px;
+  }
+}
+
+/* Prevent accidental horizontal overflow on narrow screens */
+.portal-shell,
+.page-container,
+.application-page,
+.service-page,
+.screen-card,
+.workspace-main,
+.ai-review-panel,
+.ai-drawer {
+  max-width: 100%;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+  height: auto;
+}
