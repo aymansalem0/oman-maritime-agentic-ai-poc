@@ -1,0 +1,572 @@
+<div class="portal-shell">
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="menu-link">☰ <span>Menu</span></div>
+      <div class="brand-mark" aria-label="Oman Maritime Portal">⚓</div>
+      <div class="header-actions">
+        <span>🌐 العربية</span>
+        <span class="divider"></span>
+        <span>Login</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <section *ngIf="currentScreen === 0" class="service-page">
+      <div class="breadcrumbs">Home &nbsp;›&nbsp; UNIT REGISTRATION &nbsp;›&nbsp; Vessel and Marine Unit Registration Services</div>
+
+      <div class="service-hero">
+        <div class="eyebrow">VESSEL REGISTRATION SERVICES</div>
+        <h1>Request for the Issuance of a Temporary Registration Certificate for Vessels and Maritime Units</h1>
+        <p>
+          This service enables individuals and companies to register a marine unit temporarily within the Sultanate of Oman
+          and obtain a valid temporary registration certificate until all permanent registration requirements are fulfilled.
+        </p>
+        <div class="ministry-line">⚓ Ministry of Transport, Communications and Information Technology</div>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-main">
+          <section class="content-section">
+            <h2>Required Documents</h2>
+            <p>You will need the following evidence before starting this service:</p>
+            <ul class="check-list">
+              <li>Previous registry / deletion or builder evidence</li>
+              <li>Classification and tonnage certificates</li>
+              <li>Ownership evidence</li>
+              <li>Radio / engine / technical evidence</li>
+              <li>Document supporting the intended marine activity</li>
+            </ul>
+          </section>
+
+          <section class="content-section">
+            <h2>Service Request Steps</h2>
+            <ol class="steps-list">
+              <li>Select User Type</li>
+              <li>Select Commercial Registration</li>
+              <li>Select Existing Ship or Enter New Ship Details</li>
+              <li>Marine Unit Details</li>
+            </ol>
+            <button class="link-button">Show All Steps</button>
+          </section>
+
+          <section class="content-section">
+            <h2>Service Terms</h2>
+            <ul class="check-list">
+              <li>Vessel Owner / Authorized Representative of the Vessel Owner</li>
+              <li>Omani National or Legal Resident</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="service-side-card">
+          <h3>Service</h3>
+          <div class="meta-row">◷ <span>30 minutes</span></div>
+          <div class="meta-row">▣ <span>Variable cost</span></div>
+          <button class="primary wide" (click)="startAiJourney()">Start Now <span>→</span></button>
+          <button class="secondary wide">Download the service guidance document</button>
+        </aside>
+      </div>
+    </section>
+
+    <section *ngIf="currentScreen > 0" class="application-page">
+      <div class="application-toolbar">
+        <button class="text-action" (click)="goTo(0)">× &nbsp;Exit</button>
+        <div class="small-brand">⚓</div>
+        <button class="text-action">? &nbsp; Do you need help?</button>
+      </div>
+
+      <div class="service-title-band">
+        Issuance of a temporary registration certificate for the ship or marine unit
+      </div>
+
+      <div class="journey-strip">
+        <div *ngFor="let name of screens.slice(1); let i = index"
+             class="journey-item"
+             [class.active]="currentScreen === i + 1"
+             [class.done]="currentScreen > i + 1">
+          <span class="journey-dot">{{ currentScreen > i + 1 ? '✓' : i + 1 }}</span>
+          <span>{{ name }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 1" class="screen-card onboarding">
+        <div class="screen-heading">
+          <span class="ai-icon">✦</span>
+          <div>
+            <div class="step-label">AI ASSISTED PATH</div>
+            <h2>Let the AI Assistant prepare your request</h2>
+            <p>
+              Instead of completing every form manually, upload the available evidence and let the assistant build the
+              vessel, ownership and activity profiles for your review.
+            </p>
+          </div>
+        </div>
+
+        <div class="three-cards">
+          <article>
+            <div class="number-pill">1</div>
+            <h3>Vessel Documents</h3>
+            <p>Registry, class, builder, tonnage, radio, engine and technical evidence.</p>
+          </article>
+          <article>
+            <div class="number-pill">2</div>
+            <h3>Ownership Evidence</h3>
+            <p>Owner type is detected as Individual or Company from the ownership document.</p>
+          </article>
+          <article>
+            <div class="number-pill">3</div>
+            <h3>Marine Activity Evidence</h3>
+            <p>Upload the approval or licence supporting the intended maritime activity.</p>
+          </article>
+        </div>
+
+        <div class="ai-principle">
+          <strong>How this path works:</strong>
+          AI prepares the draft and identifies exceptions. Existing platform validations remain authoritative, and the
+          applicant or officer confirms consequential actions.
+        </div>
+
+        <div class="button-row">
+          <button class="secondary" (click)="continueManual()">Continue Manually</button>
+          <button class="primary" (click)="goTo(2)">Prepare Request with AI →</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 2" class="screen-card">
+        <div class="screen-heading compact">
+          <div>
+            <div class="step-label">EVIDENCE INTAKE</div>
+            <h2>Upload the available documents</h2>
+            <p>The AI will classify the files automatically. You do not need to know which screen or field each file belongs to.</p>
+          </div>
+          <button class="secondary" (click)="loadSampleDossier()">Load Sample Vessel Dossier</button>
+        </div>
+
+        <div class="upload-grid">
+          <label class="upload-zone">
+            <span class="upload-icon">⇧</span>
+            <strong>Vessel Documents</strong>
+            <small>PDF, JPG, PNG · Registry, classification, tonnage, radio, builder, engine, GA...</small>
+            <span class="upload-button">Choose files</span>
+            <input type="file" multiple (change)="onFilesSelected($event, 'vessel')" hidden>
+          </label>
+
+          <label class="upload-zone">
+            <span class="upload-icon">⇧</span>
+            <strong>Ownership Evidence</strong>
+            <small>Bill of Sale, purchase contract, owner identity or company registration evidence.</small>
+            <span class="upload-button">Choose files</span>
+            <input type="file" multiple (change)="onFilesSelected($event, 'ownership')" hidden>
+          </label>
+
+          <label class="upload-zone">
+            <span class="upload-icon">⇧</span>
+            <strong>Marine Activity Evidence</strong>
+            <small>Approval, licence or supporting document proving the intended activity in Oman.</small>
+            <span class="upload-button">Choose files</span>
+            <input type="file" multiple (change)="onFilesSelected($event, 'activity')" hidden>
+          </label>
+        </div>
+
+        <div *ngIf="files.length" class="file-table-card">
+          <div class="table-header">
+            <h3>Uploaded Evidence</h3>
+            <span>{{ files.length }} file(s)</span>
+          </div>
+          <div class="file-row head">
+            <span>File</span><span>Evidence Group</span><span>Size</span><span>Status</span><span></span>
+          </div>
+          <div class="file-row" *ngFor="let file of files; let i = index">
+            <span class="file-name">▣ {{ file.name }}</span>
+            <span>{{ file.group | titlecase }}</span>
+            <span>{{ file.size }}</span>
+            <span class="status-chip verified">{{ file.status }}</span>
+            <button class="icon-button" (click)="removeFile(i)">Remove</button>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="secondary" (click)="goTo(1)">← Back</button>
+          <button class="primary" (click)="analyzeEvidence()">Analyze Evidence →</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 3" class="screen-card processing-screen">
+        <div class="processing-symbol">✦</div>
+        <h2>AI is preparing the registration request</h2>
+        <p>{{ processingMessage }}</p>
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="processingProgress"></div>
+        </div>
+        <strong>{{ processingProgress }}%</strong>
+
+        <div class="process-list">
+          <div *ngFor="let stage of processStages; let i = index"
+               [class.complete]="processingProgress >= ((i + 1) / processStages.length) * 100">
+            <span>{{ processingProgress >= ((i + 1) / processStages.length) * 100 ? '✓' : '○' }}</span>
+            {{ stage }}
+          </div>
+        </div>
+
+        <div class="governance-note">
+          The AI does not write directly to the database and does not replace regulatory business rules.
+          Draft actions are executed through controlled platform APIs in the target architecture.
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 4" class="workspace-layout">
+        <section class="screen-card workspace-main">
+          <div class="screen-heading compact">
+            <div>
+              <div class="step-label">AI PREPARED APPLICATION</div>
+              <h2>Review the prepared vessel profile</h2>
+              <p>Focus on exceptions. Verified values already show their source evidence.</p>
+            </div>
+            <button class="secondary" (click)="toggleAiDrawer()">✦ AI Assistant</button>
+          </div>
+
+          <div class="summary-stats">
+            <div><strong>{{ verifiedCount }}</strong><span>Verified</span></div>
+            <div class="warning"><strong>2</strong><span>Need Confirmation</span></div>
+            <div class="danger"><strong>{{ missingCount }}</strong><span>Missing</span></div>
+            <div class="danger"><strong>{{ conflictCount }}</strong><span>Conflict</span></div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title-row"><h3>Vessel Information</h3><span>FV AL NAJAH · IMO 9876543</span></div>
+            <div class="field-grid">
+              <div class="profile-field" *ngFor="let field of vesselFields">
+                <div class="field-label">{{ field.label }}</div>
+                <div class="field-value-row">
+                  <span [class.placeholder]="!field.value">{{ field.value || 'Not available' }}</span>
+                  <span class="status-chip"
+                        [class.verified]="field.status === 'Verified'"
+                        [class.warning]="field.status === 'Needs Confirmation'"
+                        [class.danger]="field.status === 'Missing' || field.status === 'Conflict'">
+                    {{ field.status }}
+                  </span>
+                </div>
+                <button class="source-link" (click)="openEvidence(field)">View Source</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title-row">
+              <h3>Ownership</h3>
+              <span>Detected owner type: <strong>{{ ownerType }}</strong></span>
+            </div>
+            <div class="field-grid">
+              <div class="profile-field" *ngFor="let field of ownerFields">
+                <div class="field-label">{{ field.label }}</div>
+                <div class="field-value-row">
+                  <span>{{ field.value }}</span>
+                  <span class="status-chip verified">{{ field.status }}</span>
+                </div>
+                <button class="source-link" (click)="openEvidence(field)">View Source</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="section-title-row"><h3>Marine Activity</h3><span>Supporting evidence detected</span></div>
+            <div class="field-grid">
+              <div class="profile-field" *ngFor="let field of activityFields">
+                <div class="field-label">{{ field.label }}</div>
+                <div class="field-value-row">
+                  <span>{{ field.value }}</span>
+                  <span class="status-chip"
+                        [class.verified]="field.status === 'Verified'"
+                        [class.warning]="field.status === 'Needs Confirmation'">
+                    {{ field.status }}
+                  </span>
+                </div>
+                <button class="source-link" (click)="openEvidence(field)">View Source</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="secondary" (click)="goTo(2)">← Documents</button>
+            <button class="primary" (click)="goTo(5)">Review Exceptions →</button>
+          </div>
+        </section>
+
+        <aside *ngIf="aiDrawerOpen" class="ai-drawer inline">
+          <div class="drawer-head"><strong>✦ AI Assistant</strong><button (click)="toggleAiDrawer()">×</button></div>
+          <p>I prepared this request from the uploaded evidence.</p>
+          <div class="assistant-summary">
+            <div>✓ Owner type detected as <strong>Company</strong>.</div>
+            <div>⚠ One Call Sign conflict requires confirmation.</div>
+            <div>! DWT and Number of Decks were not found.</div>
+            <div>? Marine activity requires applicant confirmation.</div>
+          </div>
+          <textarea placeholder="Ask about any field or finding..."></textarea>
+          <button class="primary wide">Ask AI</button>
+        </aside>
+      </div>
+
+      <div *ngIf="currentScreen === 5" class="screen-card">
+        <div class="screen-heading compact">
+          <div>
+            <div class="step-label">EXCEPTION RESOLUTION</div>
+            <h2>Only these items need your attention</h2>
+            <p>The assistant keeps already verified fields unchanged and reprocesses only the affected data.</p>
+          </div>
+        </div>
+
+        <article class="exception-card danger-border">
+          <div class="exception-title">
+            <div><span class="status-chip danger">Conflict</span><h3>Call Sign</h3></div>
+            <span>2 sources disagree</span>
+          </div>
+          <div class="source-comparison">
+            <div>
+              <small>Previous Certificate of Registry</small>
+              <strong>V8NQ7</strong>
+              <button class="secondary" (click)="resolveCallSign('V8NQ7')">Use Registry Value</button>
+            </div>
+            <div>
+              <small>Ship Radio Station Licence</small>
+              <strong>V8NQ1</strong>
+              <button class="secondary" (click)="resolveCallSign('V8NQ1')">Use Radio Licence Value</button>
+            </div>
+          </div>
+          <div *ngIf="callSignResolved" class="resolution-success">✓ Confirmed value: {{ callSign }}</div>
+        </article>
+
+        <article class="exception-card">
+          <div class="exception-title">
+            <div><span class="status-chip danger">Missing</span><h3>Deadweight (DWT)</h3></div>
+            <span>Not found in the uploaded dossier</span>
+          </div>
+          <div class="inline-input-row">
+            <input [(ngModel)]="dwt" placeholder="Enter DWT value">
+            <button class="primary" (click)="saveDwt()">Save Value</button>
+            <button class="secondary">Upload Supporting Evidence</button>
+          </div>
+          <div *ngIf="dwtResolved" class="resolution-success">✓ DWT recorded and marked for revalidation.</div>
+        </article>
+
+        <article class="exception-card">
+          <div class="exception-title">
+            <div><span class="status-chip danger">Missing</span><h3>Number of Decks</h3></div>
+            <span>Not found in the uploaded dossier</span>
+          </div>
+          <button class="secondary" (click)="setDecksNotAvailable()">Continue and flag for officer review</button>
+        </article>
+
+        <article class="exception-card warning-border">
+          <div class="exception-title">
+            <div><span class="status-chip warning">Confirm</span><h3>Marine Activity</h3></div>
+            <span>Commercial Longline Fishing</span>
+          </div>
+          <p>The activity was extracted from the Fisheries Activity Approval. Please confirm it is the intended activity in Oman.</p>
+          <button class="primary" (click)="confirmActivity()">Confirm Activity</button>
+        </article>
+
+        <div class="button-row">
+          <button class="secondary" (click)="goTo(4)">← Back to Profile</button>
+          <button class="primary" (click)="goTo(6)">Revalidate & Continue →</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 6" class="screen-card">
+        <div class="screen-heading compact">
+          <div>
+            <div class="step-label">FINAL APPLICANT REVIEW</div>
+            <h2>Review Your Request</h2>
+            <p>The application has been prepared from your evidence and validated by the existing platform rules.</p>
+          </div>
+          <span class="readiness-pill">Registration Readiness 96%</span>
+        </div>
+
+        <div class="review-sections">
+          <div><span>Marine Unit Data</span><strong>✓ Reviewed</strong><button>Change</button></div>
+          <div><span>Dimensions & Tonnage</span><strong>✓ Reviewed</strong><button>Change</button></div>
+          <div><span>Engine Data</span><strong>✓ Reviewed</strong><button>Change</button></div>
+          <div><span>Ownership</span><strong>✓ Company detected & confirmed</strong><button>Change</button></div>
+          <div><span>Marine Activity</span><strong>✓ Supporting evidence confirmed</strong><button>Change</button></div>
+          <div><span>Documents</span><strong>✓ {{ files.length }} processed</strong><button>View</button></div>
+        </div>
+
+        <label class="declaration-box">
+          <input type="checkbox" [(ngModel)]="declarationAccepted">
+          <span>
+            I declare that the information provided in this request is correct and that I am authorized to submit it.
+          </span>
+        </label>
+
+        <div class="button-row">
+          <button class="secondary" (click)="goTo(5)">← Back</button>
+          <button class="primary" (click)="submitApplication()">Accept and Send →</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentScreen === 7" class="employee-layout">
+        <section class="screen-card workspace-main">
+          <div class="step-label">OFFICER WORKSPACE</div>
+          <h2>Technical Information Required for Temporary Registration Certificate Issuance</h2>
+          <div class="request-meta">
+            <span>Request TVR-2026-000123</span>
+            <span>FV AL NAJAH</span>
+            <span>IMO 9876543</span>
+            <span class="status-chip verified">Submitted</span>
+          </div>
+
+          <div class="officer-data-grid">
+            <article>
+              <h3>Marine Unit Data</h3>
+              <p><strong>Type:</strong> Fishing Vessel - Longline</p>
+              <p><strong>Call Sign:</strong> {{ callSign }}</p>
+              <p><strong>MMSI:</strong> 356789120</p>
+              <p><strong>GT / NT:</strong> 1,245 / 610</p>
+            </article>
+            <article>
+              <h3>Ownership</h3>
+              <p><strong>Type:</strong> Company</p>
+              <p><strong>Owner:</strong> Al Bahar Marine Fisheries LLC</p>
+              <p><strong>Evidence:</strong> Bill of Sale</p>
+            </article>
+            <article>
+              <h3>Marine Activity</h3>
+              <p><strong>Activity:</strong> Commercial Longline Fishing</p>
+              <p><strong>Evidence:</strong> Fisheries Activity Approval</p>
+            </article>
+          </div>
+        </section>
+
+        <aside class="ai-review-panel">
+          <div class="panel-badge">✦ AI REVIEW SUMMARY</div>
+          <div class="score-row">
+            <div><strong>94%</strong><span>Registration Readiness</span></div>
+            <div><strong class="amber-text">Medium</strong><span>Risk</span></div>
+          </div>
+          <ul class="review-checks">
+            <li>✓ Vessel identity verified</li>
+            <li>✓ Ownership transfer evidence verified</li>
+            <li>✓ Marine activity evidence valid</li>
+            <li>✓ External identity check clear <small>(simulated)</small></li>
+            <li class="warn">⚠ Historical PSC warning requires officer awareness <small>(simulated)</small></li>
+          </ul>
+          <div class="proposed-decision">
+            <small>AI PROPOSED DECISION</small>
+            <strong>Recommended for Approval with Officer Review</strong>
+            <p>No critical exception remains. Final decision is restricted to the authorized officer.</p>
+          </div>
+          <div class="decision-grid">
+            <button class="secondary" (click)="chooseDecision('Request Information')">Request Information</button>
+            <button class="secondary" (click)="chooseDecision('Refer for Inspection')">Refer for Inspection</button>
+            <button class="danger-button" (click)="chooseDecision('Reject')">Reject</button>
+            <button class="approve-button" (click)="chooseDecision('Approve')">Approve</button>
+          </div>
+        </aside>
+      </div>
+
+      <div *ngIf="currentScreen === 8" class="screen-card decision-screen">
+        <div class="decision-hero">
+          <span class="human-badge">HUMAN-IN-THE-LOOP</span>
+          <h2>Confirm Final Officer Decision</h2>
+          <p>The AI cannot execute this consequential action. An authorized officer must confirm the final outcome.</p>
+        </div>
+
+        <div class="decision-summary">
+          <div>
+            <small>REQUEST</small>
+            <strong>TVR-2026-000123</strong>
+          </div>
+          <div>
+            <small>VESSEL</small>
+            <strong>FV AL NAJAH · IMO 9876543</strong>
+          </div>
+          <div>
+            <small>AI RECOMMENDATION</small>
+            <strong>Approve with Officer Review</strong>
+          </div>
+          <div>
+            <small>OFFICER SELECTION</small>
+            <strong>{{ officerDecision || 'Not selected' }}</strong>
+          </div>
+        </div>
+
+        <div *ngIf="officerDecision !== 'Approve'" class="override-box">
+          <label>Officer reason / override justification *</label>
+          <textarea [(ngModel)]="overrideReason"
+                    placeholder="Explain the reason for requesting information, referring for inspection, rejecting, or overriding the AI recommendation."></textarea>
+        </div>
+
+        <div class="audit-note">
+          The final action, evidence reviewed, AI recommendation and officer rationale are recorded in the audit trail.
+        </div>
+
+        <div class="button-row">
+          <button class="secondary" (click)="goTo(7)">← Back to Review</button>
+          <button class="primary" (click)="finalizeDecision()">Confirm Decision</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button *ngIf="currentScreen >= 2 && currentScreen <= 6"
+          class="floating-ai"
+          (click)="toggleAiDrawer()"
+          aria-label="Open AI Assistant">
+    ✦
+  </button>
+
+  <aside *ngIf="aiDrawerOpen && currentScreen !== 4" class="ai-drawer floating">
+    <div class="drawer-head"><strong>✦ AI Assistant</strong><button (click)="toggleAiDrawer()">×</button></div>
+    <p>I am following the current request and can explain extracted values, missing evidence and validation findings.</p>
+    <div class="assistant-summary">
+      <div>Vessel: <strong>FV AL NAJAH</strong></div>
+      <div>Owner: <strong>Company</strong></div>
+      <div>Activity: <strong>Commercial Longline Fishing</strong></div>
+    </div>
+    <textarea placeholder="Ask about this request..."></textarea>
+    <button class="primary wide">Ask AI</button>
+  </aside>
+
+  <div *ngIf="evidenceViewerOpen" class="modal-backdrop" (click)="evidenceViewerOpen = false">
+    <div class="evidence-modal" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <div>
+          <small>AI EVIDENCE VIEWER</small>
+          <h3>{{ selectedField?.label }}</h3>
+        </div>
+        <button (click)="evidenceViewerOpen = false">×</button>
+      </div>
+      <div class="evidence-layout">
+        <div class="document-list">
+          <strong>Source Documents</strong>
+          <div class="selected-doc">▣ {{ selectedField?.source || 'No supporting document' }}</div>
+        </div>
+        <div class="document-preview">
+          <div class="paper-preview">
+            <div class="paper-logo">⚓</div>
+            <h4>{{ selectedField?.source }}</h4>
+            <div class="fake-line wide"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line medium"></div>
+            <div class="highlight-box">
+              Extracted evidence for <strong>{{ selectedField?.label }}</strong>:
+              <strong>{{ selectedField?.value || 'Not available' }}</strong>
+            </div>
+            <div class="fake-line wide"></div>
+            <div class="fake-line medium"></div>
+          </div>
+        </div>
+        <div class="evidence-details">
+          <strong>Extraction Evidence</strong>
+          <dl>
+            <dt>Value</dt><dd>{{ selectedField?.value || 'Not available' }}</dd>
+            <dt>Source</dt><dd>{{ selectedField?.source || 'Not found' }}</dd>
+            <dt>Page</dt><dd>{{ selectedField?.page || '—' }}</dd>
+            <dt>Confidence</dt><dd>{{ selectedField?.confidence || 0 }}%</dd>
+            <dt>Status</dt><dd>{{ selectedField?.status }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
