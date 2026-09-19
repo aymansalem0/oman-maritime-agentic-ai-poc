@@ -80,13 +80,20 @@
         Issuance of a temporary registration certificate for the ship or marine unit
       </div>
 
-      <div class="journey-strip">
-        <div *ngFor="let name of screens.slice(1); let i = index"
-             class="journey-item"
-             [class.active]="currentScreen === i + 1"
-             [class.done]="currentScreen > i + 1">
-          <span class="journey-dot">{{ currentScreen > i + 1 ? '✓' : i + 1 }}</span>
-          <span>{{ name }}</span>
+      <div class="service-progress" *ngIf="currentScreen <= 6">
+        <div>
+          <span class="progress-kicker">AI Assisted Request</span>
+          <strong>Step {{ currentScreen }} of 6</strong>
+        </div>
+        <div class="progress-rule">
+          <span [style.width.%]="(currentScreen / 6) * 100"></span>
+        </div>
+      </div>
+
+      <div class="service-progress officer-progress" *ngIf="currentScreen >= 7">
+        <div>
+          <span class="progress-kicker">Employee Review</span>
+          <strong>{{ currentScreen === 7 ? 'AI Review Summary' : 'Final Decision' }}</strong>
         </div>
       </div>
 
