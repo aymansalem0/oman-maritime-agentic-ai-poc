@@ -1643,3 +1643,225 @@ video {
   max-width: 100%;
   height: auto;
 }
+
+
+/* =========================================================
+   Oman Maritime visual alignment refinement
+   Keeps AI as a feature inside the existing service pattern.
+   ========================================================= */
+
+.application-page {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.application-toolbar {
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  min-height: 56px;
+  box-shadow: none;
+}
+
+.service-title-band {
+  background: #f4f0e7;
+  color: #20242c;
+  border-left: 0;
+  border-right: 0;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 17px 22px;
+}
+
+.service-progress {
+  margin: 24px 0 14px;
+  padding: 0 2px;
+}
+
+.service-progress > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #333842;
+  font-size: 13px;
+}
+
+.progress-kicker {
+  color: #5d6470;
+  font-weight: 600;
+}
+
+.progress-rule {
+  height: 3px;
+  margin-top: 10px;
+  background: #e2e5ea;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-rule span {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+  transition: width .25s ease;
+}
+
+.officer-progress {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.screen-card {
+  border-radius: 4px;
+  box-shadow: none;
+  border-color: #e1e3e8;
+  padding: 30px 34px;
+}
+
+.screen-heading h2,
+.decision-hero h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.screen-heading p,
+.decision-hero p {
+  font-size: 14px;
+}
+
+.step-label {
+  font-size: 11px;
+  letter-spacing: .06em;
+}
+
+.primary,
+.secondary,
+.danger-button,
+.approve-button {
+  min-height: 38px;
+  border-radius: 18px;
+  padding: 0 18px;
+  font-size: 13px;
+}
+
+.upload-zone {
+  border-radius: 6px;
+  background: #fff;
+  border-color: #b7c0d0;
+}
+
+.upload-zone:hover {
+  background: #fafcff;
+}
+
+.three-cards article,
+.profile-section,
+.officer-data-grid article,
+.file-table-card,
+.exception-card,
+.review-sections,
+.ai-drawer,
+.ai-review-panel {
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.profile-field {
+  border-radius: 5px;
+  background: #fff;
+}
+
+.ai-principle,
+.governance-note,
+.audit-note,
+.assistant-summary,
+.proposed-decision {
+  border-radius: 5px;
+}
+
+.button-row {
+  padding-top: 18px;
+  margin-top: 28px;
+  border-top: 1px solid #e8eaee;
+}
+
+.floating-ai {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  right: max(22px, calc((100vw - 1120px) / 2 - 64px));
+}
+
+.ai-drawer.floating {
+  right: max(22px, calc((100vw - 1120px) / 2));
+  width: 350px;
+}
+
+@media (max-width: 992px) {
+  .application-page {
+    max-width: 100%;
+  }
+
+  .screen-card {
+    padding: 26px 22px;
+  }
+
+  .service-progress {
+    margin-top: 18px;
+  }
+
+  .floating-ai {
+    right: 20px;
+  }
+
+  .ai-drawer.floating {
+    right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-title-band {
+    padding: 14px 14px;
+    font-size: 14px;
+  }
+
+  .service-progress {
+    margin: 16px 2px 12px;
+  }
+
+  .service-progress > div:first-child {
+    font-size: 12px;
+  }
+
+  .screen-card {
+    padding: 20px 16px;
+  }
+
+  .screen-heading h2,
+  .decision-hero h2 {
+    font-size: 21px;
+  }
+
+  .button-row {
+    padding-top: 14px;
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 576px) {
+  .service-progress > div:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .primary,
+  .secondary,
+  .danger-button,
+  .approve-button {
+    width: 100%;
+    min-height: 42px;
+  }
+}
